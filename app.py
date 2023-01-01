@@ -52,9 +52,13 @@ with tab2:
     
     filename = 'Data Prediksi Beras 2022 Skenario {}.csv'.format(model.split()[1])
     df = pd.read_csv(filename)
+    error = abs(df['IR-64 I Actual Price'] - df['IR-64 I Predictions Price'])
     df.insert(loc = 0,
             column = 'No',
             value = range(1, 365))
+    df.insert(loc = 4,
+            column = 'Error',
+            value = error)
     tanggal = df['Tanggal'].values
 
     params = my_model_params[int(model.split()[1]) - 1]
